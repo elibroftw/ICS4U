@@ -5,7 +5,6 @@ import java.util.Comparator;
 import java.util.List;
 
 public class BurrowWheeler {
-
 	public static void main(String[] args) {
 		testTransform("^BANANA|", "BNN^AA|A", "Wikipedia example");
 		testTransform("AAAAA", "AAAAA", "If every character is the same");

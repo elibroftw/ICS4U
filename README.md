@@ -2,7 +2,7 @@
 Grade 12 Computer Science lessons, and assignments
 
 ## NOTE
-Eclipse IDE was used
+JDK 1.8 was used.
 
 Some files require javaFX to be installed
 
