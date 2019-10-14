@@ -1,0 +1,42 @@
+{
+    "spriteSheet": "data\\Locke.gif",
+    "metadata": "41 16 24",
+    "animations": {
+        "attack": {
+            "frameData": [[1, 1], [2, 1], [3, 1], [4, 1]],
+            "loops": null
+        },
+        "idle_down": {
+            "frameData": [[1, 1]],
+            "loops": "0"
+        },
+        "walk_down": {
+            "frameData": [[0, 10], [1, 10], [2, 10], [1, 10]],
+            "loops": "0"
+        },
+        "idle_up": {
+            "frameData": [[4, 1]],
+            "loops": "0"
+        },
+        "walk_up": {
+            "frameData": [[3, 10], [4, 10], [5, 10], [4, 10]],
+            "loops": "0"
+        },
+        "idle_left": {
+            "frameData": [[7, 1]],
+            "loops": "0"
+        },
+        "walk_left": {
+            "frameData": [[6, 10], [7, 10], [8, 10], [7, 10]],
+            "loops": "0"
+        },
+        "idle_right": {
+            "frameData": [[10, 1]],
+            "loops": "0"
+        },
+        "walk_right": {
+            "frameData": [[9, 10], [10, 10], [11, 10], [10, 10]],
+            "loops": "0"
+        }
+    }
+}
