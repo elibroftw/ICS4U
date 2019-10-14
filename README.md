@@ -1,8 +1,9 @@
 # ICS4U
 Grade 12 Computer Science lessons, and assignments
 
-# NOTE
+## NOTE
 Eclipse IDE was used
+
 Some files require javaFX to be installed
 
 
