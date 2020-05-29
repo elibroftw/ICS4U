@@ -17,7 +17,9 @@ sourceSets {
     main.resources.srcDirs += 'src/data'
 }
 
-jar {
+application {
+    exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
+
     manifest {
       attributes 'Main-Class': 'animation.Main'
     }
