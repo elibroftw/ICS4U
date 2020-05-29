@@ -1,0 +1,32 @@
+plugins {
+  id 'application'
+  id 'org.openjfx.javafxplugin' version '0.0.8'
+}
+
+repositories {
+    mavenCentral()
+}
+
+javafx {
+    version = "14"
+    modules = [ 'javafx.controls', 'javafx.embed', 'javafx.swing', 'javafx.fxml', 'javafx.scene', 'javafx.stage', 'javafx.geometry']
+}
+
+sourceSets {
+    main.java.srcDirs += 'src'
+    main.resources.srcDirs += 'src/data'
+}
+
+jar {
+    manifest {
+      attributes 'Main-Class': 'animation.Main'
+    }
+    baseName = 'sprite-sheet-animator'
+    version =  '0.1.0'
+}
+
+// mainClassName = 'animation.Main'
+version = '1.0'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
