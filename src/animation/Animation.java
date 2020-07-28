@@ -32,16 +32,16 @@ public class Animation {
 	public void setLoop(int reference) {
 		loop = reference;
 	}
-	
+
 	/**
 	 * sets the animation to the beginning
 	 * @return
 	 */
-	public int[] start() {
-		index = -1;
-		return getNext();
+	public int[] start(boolean isReversed) {
+		index = isReversed ? frames.size() - 1 : 0;
+		return frames.get(index);
 	}
-	
+
 	/**
 	 * gets the next frame in the animation, the next frame is the same frame if the animation is not looped and is maxed
 	 * @return
@@ -50,25 +50,18 @@ public class Animation {
 	public int[] getNext() throws ArrayIndexOutOfBoundsException{
 		index += 1;
 		if(index >= frames.size()) {
-			if (isLooped()) {
-				index = loop;
-			}
-			else {
-				index = Math.max(0, index-1);
-			}
+			index = isLooped() ? loop : Math.max(frames.size() - 1, 0);
 		}
 		return frames.get(index); // returns Spirte number, Frame timer; if frame timer is 0, that means infinity
 	}
-	
+
 	/**
 	 * gets the nextFrame even if the animation isn't looped (gets first frame in this case)
 	 * @return
 	 */
 	public int[] overrideGetNext() {
 		index += 1;
-		if(index >= frames.size()) {
-			index = Math.max(0, loop);
-		}
+		if(index >= frames.size()) index = Math.max(0, loop);
 		return frames.get(index);
 	}
 
@@ -79,12 +72,10 @@ public class Animation {
 	 */
 	public int[] getPrevious() throws ArrayIndexOutOfBoundsException{
 		index -= 1;
-		if(index < 0) {
-			index = frames.size() - 1;
-		}
+		if(index < 0) index = isLooped() ? frames.size() - 1 : 0;
 		return frames.get(index);
 	}
-	
+
 	/**
 	 * get the names of the animation
 	 * @return
@@ -92,7 +83,7 @@ public class Animation {
 	public String getName() {
 		return name;
 	}
-	
+
 	/**
 	 * returns if the animation is looped or not by checking if loop == -1
 	 * @return
@@ -100,7 +91,7 @@ public class Animation {
 	public boolean isLooped(){
 		return (loop != -1);
 	}
-	
+
 	/**
 	 * returns how many frames are in the animation
 	 * @return
@@ -108,7 +99,7 @@ public class Animation {
 	public int size() {
 		return frames.size();
 	}
-	
+
 	/**
 	 * returns the frames of the animation
 	 * @return
@@ -116,7 +107,7 @@ public class Animation {
 	public LinkedList<int[]> getFrames(){
 		return frames;
 	}
-	
+
 	@Override
 	public String toString(){
 		return "[Animation, name=" + name + ", frames="+frames.size()+"]";

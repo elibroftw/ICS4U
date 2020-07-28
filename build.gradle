@@ -19,8 +19,7 @@ sourceSets {
             srcDirs = ['src']
         }
         resources {
-            srcDirs = ['src/data']
-            includes = ['src/animation/main.fxml']
+            srcDirs = ['src/data', 'src/animation']
         }
     }
 }

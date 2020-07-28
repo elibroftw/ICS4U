@@ -5,6 +5,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import javax.print.DocFlavor.STRING;
+
 import java.awt.image.BufferedImage;
 
 import javafx.application.Application;
@@ -48,6 +50,8 @@ public class Main extends Application implements Initializable {
 	private boolean isPaused = false;
 	private boolean isReversed = false;
 	private int slowMotion = 1;
+	private final String fxmlFile = "main.fxml";
+	private final String lockeX2 = "src/data/LockeX2.txt";
 
 	// private Service<Void> backgroundThread;
 
@@ -63,7 +67,9 @@ public class Main extends Application implements Initializable {
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		window = primaryStage;
-		Parent root = FXMLLoader.load(getClass().getResource("/animation/main.fxml"));
+		URL fxmlFileResource = getClass().getClassLoader().getResource(fxmlFile);
+		System.out.println(fxmlFileResource);
+		Parent root = FXMLLoader.load(fxmlFileResource);
 		window.setScene(new Scene(root, 977, 651));
 		window.setTitle("Animation Player");
 		window.show();
@@ -99,7 +105,7 @@ public class Main extends Application implements Initializable {
 	 * Just calls change animation so that the currently selected animation restarts
 	 */
 	public void restart() {
-		changeAnimation();
+		if (animationCombos.getValue() != null) changeAnimation();
 	}
 
 	/**
@@ -205,31 +211,32 @@ public class Main extends Application implements Initializable {
 	 *            animation
 	 */
 	public void play(Animation animation, Long threadStart) {
-		displaySprite(spriteSheet.getSprite(animation.start()[0])); // display the first Frame
+		displaySprite(spriteSheet.getSprite(animation.start(isReversed)[0])); // display the first Frame
 		isPaused = false; // unPause if paused
 		playPauseButton.setText("Pause");
 		Thread taskThread = new Thread(() -> { // needs to be threaded to prevent Non Responsive GUI
-			int[] frame = animation.start(); // get data of the first frame
+			int[] frame = animation.start(isReversed); // get data of the first frame
 			int frameTimer = frame[1]; // time the frame should be displayed for
 			do {
 				try {
 					Thread.sleep(frameTimer * 30 * slowMotion); // display the frame for this much time, I used 30 to make animations look normal
 				} catch (InterruptedException e) {
 				}
-				if (!isPaused && animationStart == threadStart) { // show frame if correct animation is selected and if animation is not paused
+				// show from if not pause and if the correct animation is selected
+				if (!isPaused && animationStart == threadStart) {
 					if (isReversed) frame = animation.getPrevious();
 					else frame = animation.getNext();
-					final int sn = frame[0];
+					final int spriteNumber = frame[0];
 					frameTimer = frame[1];
 					Platform.runLater(new Runnable() { // updates GUI on main thread
 						@Override
 						public void run() {
-							displaySprite(spriteSheet.getSprite(sn));
+							displaySprite(spriteSheet.getSprite(spriteNumber));
 						}
 					});
 				}
 			} while (animationStart == threadStart);
-			// the last animation start time tells us that this animation is suppoed to be playing, and so is continued
+			// the last animation start time tells us that this animation is supposed to be playing, and so is continued
 			// if only animations were compared, there would be a mess with restarting animations
 		});
 		taskThread.setDaemon(true); // if GUI is closed so are these
@@ -241,7 +248,7 @@ public class Main extends Application implements Initializable {
 	@Override
 	public void initialize(URL fxmlFileLocation, ResourceBundle resources) {
 		try {
-			spriteData = new SpriteData("src/data/LockeX2.txt"); // Parse data
+			spriteData = new SpriteData(lockeX2); // Parse data
 			animations = spriteData.getAnimations(); // get the animation list
 			animationCombos.getItems().addAll(spriteData.getNames()); // add names to comboBox
 			String spriteLocation = spriteData.getSpriteLocation(); // gets the location of the image
