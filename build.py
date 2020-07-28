@@ -10,11 +10,11 @@ with suppress(IndexError):
     if sys.argv[1] == 'build': OPTION = 'BUILD'
     elif sys.argv[1] == 'run': OPTION = 'RUN'
     else: OPTION = 'COMPILE'
-    
+
 
 libs = {
     'javaFX': {
-        'path': 'C:/Users/maste/AppData/Local/Programs/java/libs/javafx-sdk-14.0.1/lib',
+        'path': r'C:\Hard Drive\Other\java\javafx-14.0.1\lib',  # or %PATH_TO_FX%
         'modules': {
             'javafx.controls',
             'javafx.fxml'

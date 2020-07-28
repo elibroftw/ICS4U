@@ -1,4 +1,5 @@
 plugins {
+  id 'java'
   id 'application'
   id 'org.openjfx.javafxplugin' version '0.0.8'
 }
@@ -9,26 +10,32 @@ repositories {
 
 javafx {
     version = "14"
-    modules = [ 'javafx.controls', 'javafx.embed', 'javafx.swing', 'javafx.fxml', 'javafx.scene', 'javafx.stage', 'javafx.geometry']
+    modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.swing' ]
 }
 
 sourceSets {
-    main.java.srcDirs += 'src'
-    main.resources.srcDirs += 'src/data'
-}
-
-application {
-    exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
-
-    manifest {
-      attributes 'Main-Class': 'animation.Main'
+    main {
+        java {
+            srcDirs = ['src']
+        }
+        resources {
+            srcDirs = ['src/data']
+            includes = ['src/animation/main.fxml']
+        }
     }
-    baseName = 'sprite-sheet-animator'
-    version =  '0.1.0'
 }
 
-// mainClassName = 'animation.Main'
+// application {
+//     exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
+
+//     manifest {
+//       attributes 'Main-Class': 'animation.Main'
+//     }
+//     baseName = 'sprite-sheet-animator'
+//     version =  '0.1.0'
+// }
+
+mainClassName = 'animation.Main'
 version = '1.0'
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
-

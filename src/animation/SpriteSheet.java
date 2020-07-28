@@ -9,7 +9,7 @@ import java.util.List;
 import javax.imageio.ImageIO;
 
 public class SpriteSheet {
-	List<BufferedImage> subimages = new ArrayList<>(); // Each gif is split into sub images 
+	List<BufferedImage> subimages = new ArrayList<>(); // Each gif is split into sub images
 	SpriteSheet(String resourceFile, int spriteWidth, int spriteHeight, int numberOfSprites){
 		BufferedImage img = null;
 		try {
@@ -20,7 +20,7 @@ public class SpriteSheet {
 			subimages.add(img.getSubimage(i, 0, spriteWidth, spriteHeight));
 		}
 	}
-	
+
 	/**
 	 * returns the frame image at the given index
 	 * @param index

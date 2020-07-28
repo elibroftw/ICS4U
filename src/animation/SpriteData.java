@@ -16,7 +16,7 @@ public class SpriteData {
 
 	/**
 	 * Parses the data of a given file
-	 * 
+	 *
 	 * @param filename
 	 * @throws IOException
 	 */
@@ -45,7 +45,7 @@ public class SpriteData {
 		br.close();
 
 	}
-	
+
 	/**
 	 * returns a list of the animations
 	 * @return animations
@@ -61,7 +61,7 @@ public class SpriteData {
 	public List<String> getNames() {
 		return animationNames;
 	}
-	
+
 	/**
 	 * returns the location of the sprite gif
 	 * @return spriteLocation

@@ -1,29 +1,31 @@
 package animation;
 
-import java.awt.Button;
-import java.awt.Image;
-import java.awt.Label;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import javax.swing.text.html.ImageView;
+import java.awt.image.BufferedImage;
 
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.event.ActionEvent;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.layout.VBox;
+// import javax.swing.text.html.ImageView;
+import javafx.scene.image.ImageView;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -51,7 +53,7 @@ public class Main extends Application implements Initializable {
 
 	/**
 	 * Main method for GUI
-	 * 
+	 *
 	 * @param args
 	 */
 	public static void main(String[] args) {
@@ -69,7 +71,7 @@ public class Main extends Application implements Initializable {
 
 	/**
 	 * Displays an alert box
-	 * 
+	 *
 	 * @param title
 	 *            of the alert box
 	 * @param alertText
@@ -81,10 +83,10 @@ public class Main extends Application implements Initializable {
 		window.setTitle(title);
 		window.setMinWidth(350);
 		Label label = new Label(alertText);
-		Button closeBUtton = new Button("Close");
-		closeBUtton.setOnAction(e -> window.close());
+		Button closeButton = new Button("Close");
+		closeButton.setOnAction(e -> window.close());
 		VBox layout = new VBox(10);
-		layout.getChildren().addAll(label, closeBUtton);
+		layout.getChildren().addAll(label, closeButton);
 		layout.setAlignment(Pos.CENTER);
 		Scene scene = new Scene(layout);
 		window.setScene(scene);
@@ -93,7 +95,7 @@ public class Main extends Application implements Initializable {
 
 	/**
 	 * Linked to restart button
-	 * 
+	 *
 	 * Just calls change animation so that the currently selected animation restarts
 	 */
 	public void restart() {
@@ -102,7 +104,7 @@ public class Main extends Application implements Initializable {
 
 	/**
 	 * Linked to slowMotion checkBox
-	 * 
+	 *
 	 * Multiplies the frame timer by 2 when true
 	 */
 	public void slowMotion() {
@@ -114,7 +116,7 @@ public class Main extends Application implements Initializable {
 
 	/**
 	 * Linked to reverse checkBox
-	 * 
+	 *
 	 * Sets reverse boolean
 	 */
 	public void reverse() {
@@ -123,7 +125,7 @@ public class Main extends Application implements Initializable {
 
 	/**
 	 * Linked to playPause button
-	 * 
+	 *
 	 * Changes button text Flips isPaused boolean value
 	 */
 	public void playPause() {
@@ -136,9 +138,9 @@ public class Main extends Application implements Initializable {
 
 	/**
 	 * Linked to nextFrame button
-	 * 
+	 *
 	 * Displays the next frame of the animation
-	 * 
+	 *
 	 * Depends on if the animation is reversed
 	 */
 	public void nextFrame() {
@@ -152,9 +154,9 @@ public class Main extends Application implements Initializable {
 
 	/**
 	 * Linked to previousFrame button
-	 * 
+	 *
 	 * Displays the previous frame of the animation
-	 * 
+	 *
 	 * Depends on if the animation is reversed
 	 */
 	public void previousFrame() {
@@ -180,7 +182,7 @@ public class Main extends Application implements Initializable {
 	/**
 	 * Converts BufferedImage into JavaFX friendly Image and then displays the
 	 * sprite on the stackPane using ImageView
-	 * 
+	 *
 	 * @param sprite
 	 */
 	private void displaySprite(BufferedImage sprite) {
@@ -195,7 +197,7 @@ public class Main extends Application implements Initializable {
 	/**
 	 * plays the given animation and uses threadStart to see if the currentAnimation
 	 * is the latest animation takes into account slowMotion, isPaused, isReversed
-	 * 
+	 *
 	 * @param animation
 	 *            the animaiton to be played on the GUI
 	 * @param threadStart
