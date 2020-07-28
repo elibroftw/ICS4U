@@ -1,5 +1,4 @@
 plugins {
-  id 'java'
   id 'application'
   id 'org.openjfx.javafxplugin' version '0.0.8'
 }
@@ -13,6 +12,11 @@ javafx {
     modules = [ 'javafx.controls', 'javafx.fxml', 'javafx.swing' ]
 }
 
+mainClassName = 'animation.Main'
+version = '1.0'
+sourceCompatibility = 14
+targetCompatibility = 14
+
 sourceSets {
     main {
         java {
@@ -24,17 +28,11 @@ sourceSets {
     }
 }
 
-// application {
-//     exclude 'META-INF/*.SF', 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.MF'
-
-//     manifest {
-//       attributes 'Main-Class': 'animation.Main'
-//     }
-//     baseName = 'sprite-sheet-animator'
-//     version =  '0.1.0'
-// }
-
-mainClassName = 'animation.Main'
-version = '1.0'
-sourceCompatibility = 1.8
-targetCompatibility = 1.8
+jar {
+    manifest {
+        attributes 'Main-Class': 'animation.Main'
+    }
+    from {
+        configurations.runtimeClasspath.collect { it.isDirectory() ? it : zipTree(it) }
+    }
+}
